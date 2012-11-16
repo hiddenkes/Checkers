@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>options</title>
+
+    <!-- WinJS references -->
+    <link href="//Microsoft.WinJS.1.0/css/ui-dark.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.1.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.1.0/js/ui.js"></script>
+
+    <link href="options.css" rel="stylesheet" />
+    <script src="options.js"></script>
+</head>
+<body>
+    <div class="options fragment">
+        <header aria-label="Header content" role="banner">
+            <button class="win-backbutton" aria-label="Back" disabled type="button"></button>
+            <h1 class="titlearea win-type-ellipsis">
+                <span class="pagetitle">Options</span>
+            </h1>
+        </header>
+        <section aria-label="Main content" role="main">
+            <div class="win-settings-section">
+				<div id="musicToggle" data-win-control="WinJS.UI.ToggleSwitch" data-win-options="{title:'Theme Music'}">
+				</div>
+			</div>
+            <br />
+			<div class="win-settings-section">
+				<div id="soundsToggle" data-win-control="WinJS.UI.ToggleSwitch" data-win-options="{title:'Move Sounds'}">
+				</div>
+			</div>
+			<br />
+			<div class="win-settings-section">
+				<label>Theme</label> <br />
+                <select id="themeSelect" aria-label="Theme select control">
+                    <option value="standard" selected>Standard</option>
+                    <option value="metro">Metro</option>
+					<!--<option value="browsers">Browsers</option>
+					<option value="blue">Blue</option>
+					<option value="inverse">Inverse</option>
+					<option value="custom">Custom</option>-->
+                </select>
+			</div>
+        </section>
+    </div>
+</body>
+</html>

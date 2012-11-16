@@ -1,0 +1,780 @@
+﻿/*
+    File: Checkers.css
+    
+    Abstract: Checkers Demo
+    
+    Version: 1.0
+    
+    Disclaimer: IMPORTANT:  This Apple software is supplied to you by
+    Apple Inc. ("Apple") in consideration of your agreement to the
+    following terms, and your use, installation, modification or
+    redistribution of this Apple software constitutes acceptance of these
+    terms.  If you do not agree with these terms, please do not use,
+    install, modify or redistribute this Apple software.
+    
+    In consideration of your agreement to abide by the following terms, and
+    subject to these terms, Apple grants you a personal, non-exclusive
+    license, under Apple's copyrights in this original Apple software (the
+    "Apple Software"), to use, reproduce, modify and redistribute the Apple
+    Software, with or without modifications, in source and/or binary forms;
+    provided that if you redistribute the Apple Software in its entirety and
+    without modifications, you must retain this notice and the following
+    text and disclaimers in all such redistributions of the Apple Software.
+    Neither the name, trademarks, service marks or logos of Apple Inc.
+    may be used to endorse or promote products derived from the Apple
+    Software without specific prior written permission from Apple.  Except
+    as expressly stated in this notice, no other rights or licenses, express
+    or implied, are granted by Apple herein, including but not limited to
+    any patent rights that may be infringed by your derivative works or by
+    other works in which the Apple Software may be incorporated.
+    
+    The Apple Software is provided by Apple on an "AS IS" basis.  APPLE
+    MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION
+    THE IMPLIED WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY AND FITNESS
+    FOR A PARTICULAR PURPOSE, REGARDING THE APPLE SOFTWARE OR ITS USE AND
+    OPERATION ALONE OR IN COMBINATION WITH YOUR PRODUCTS.
+    
+    IN NO EVENT SHALL APPLE BE LIABLE FOR ANY SPECIAL, INDIRECT, INCIDENTAL
+    OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) ARISING IN ANY WAY OUT OF THE USE, REPRODUCTION,
+    MODIFICATION AND/OR DISTRIBUTION OF THE APPLE SOFTWARE, HOWEVER CAUSED
+    AND WHETHER UNDER THEORY OF CONTRACT, TORT (INCLUDING NEGLIGENCE),
+    STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+    
+    Copyright (C) 2010 Apple Inc. All Rights Reserved.
+*/
+#GameParent {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    top: 100px;
+    width: 640px;
+    height: 730px;
+}
+
+#CheckerBoard {
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    background-image: url("GameBoard.png");
+    background-size: 100% 100%;
+    width: 576px;
+    height: 576px;
+    border: 2px solid #444444;
+    z-index: 0;
+}
+
+.CheckerBoardFlasher {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 576px;
+    height: 576px;
+    opacity: 0;
+}
+
+@-ms-keyframes Flash {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.CheckerBoardFlasher.Flash {
+    -ms-animation-name: Flash;
+    -ms-animation-duration: 0.2s;
+    -ms-animation-iteration-count: 1;
+    -ms-animation-timing-function: ease-in-out;
+    z-index: 1;
+    background-color: white;
+}
+
+.CheckerBoardFlasher.FlashYellow {
+    -ms-animation-name: Flash;
+    -ms-animation-duration: 0.3s;
+    -ms-animation-iteration-count: 1;
+    -ms-animation-timing-function: ease-in-out;
+    z-index: 1;
+    background-color: yellow;
+}
+
+.ButtonContents:active {
+    box-shadow: 0px 0px 12px gray;    
+}
+
+.ButtonContents {
+    background-color: black;
+    background-image: -ms-gradient(linear, 0% 0%, 0% 100%, from(#5E5E5E), to(#5C5C5C), color-stop(.6,#292929));
+  	border: solid 1px black;
+    color: white;
+    border-radius: 10px;
+    font-size: 18px;
+    padding: 12px 18px 12px 18px;
+    text-size-adjust: 150%;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 172px;
+}
+
+.ButtonDiv {
+    float: left;
+}
+
+#ButtonsContainer {
+    padding-top: 18px;
+    padding-left: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 610px;
+    height: 62px;
+}
+
+.BoardSquare {
+    position: absolute;
+    width: 72px;
+    height: 72px;
+    background-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.OuterChecker {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+	top: 0px;
+    transition-property: transform, opacity, visibility; 
+    transition-duration: 0.5s, 0.5s, 0.5s;
+    transition-timing-function: ease-out, ease-in, linear;    
+    transform 0.5s ease-in-out;
+}
+
+.Checker {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+	top: 0px;
+    transform: scale3d(1, 1, 1);
+    transition: transform 0.4s ease-in-out;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    background-size: 100% 100%;
+}
+
+.Checker .KingImage {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    width: 40px;
+    height: 40px;
+    opacity: 0;
+    transition: opacity 0.5s linear;
+}
+
+.Checker.King .KingImage {
+    opacity: 1.0;
+}
+
+.Player0.standard {
+    background-image: url("standard/Player0Checker.png");
+    background-size: 66px 66px;
+}
+
+.Player1.standard {
+    background-image: url("standard/Player1Checker.png");
+    background-size: 66px 66px;
+}
+
+.Player0.metro {
+    background-image: url("metro/Player0Checker.png");
+    background-size: 66px 66px;
+}
+
+.Player1.metro {
+    background-image: url("metro/Player1Checker.png");
+    background-size: 66px 66px;
+}
+
+@-ms-keyframes Pulsing {
+    0% {
+        transform: scale(1.6);
+    }
+    50% {
+        transform: scale(1.3);
+    }
+    100% {
+        transform: scale(1.6);
+    }
+}
+
+.Checker.Selected {
+    transform: scale(1.6);
+    transition: transform 0.2s ease-out;
+    -ms-animation-name: Pulsing;
+    -ms-animation-delay: 0.20s;
+    -ms-animation-duration: 1.5s;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: ease-in-out;
+}
+
+.Captured {
+    opacity: 0.0;
+    visibility: hidden;
+}
+
+.Player0Container, .Player1Container {
+    float: left;
+    width: 160px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#TurnIndicatorContainer {
+    height: 60px;
+    position: relative; 
+    z-index: 1;
+}
+
+.Player0TurnIndicator, .Player1TurnIndicator {
+    padding-top: 8px;
+    transition-property: opacity;
+    transition-duration: 0.8s;
+    transition-timing-function: linear;
+}
+
+.Player0TurnIndicator {
+    float: right;
+    padding-right: 5px;
+    opacity: 1.0;
+}
+
+.Player1TurnIndicator {
+    padding-left: 5px;
+    opacity: 0.25;
+}
+
+/*
+    File: EndGame.css
+    
+    Abstract: Checkers Demo
+    
+    Version: 1.0
+    
+    Disclaimer: IMPORTANT:  This Apple software is supplied to you by
+    Apple Inc. ("Apple") in consideration of your agreement to the
+    following terms, and your use, installation, modification or
+    redistribution of this Apple software constitutes acceptance of these
+    terms.  If you do not agree with these terms, please do not use,
+    install, modify or redistribute this Apple software.
+    
+    In consideration of your agreement to abide by the following terms, and
+    subject to these terms, Apple grants you a personal, non-exclusive
+    license, under Apple's copyrights in this original Apple software (the
+    "Apple Software"), to use, reproduce, modify and redistribute the Apple
+    Software, with or without modifications, in source and/or binary forms;
+    provided that if you redistribute the Apple Software in its entirety and
+    without modifications, you must retain this notice and the following
+    text and disclaimers in all such redistributions of the Apple Software.
+    Neither the name, trademarks, service marks or logos of Apple Inc.
+    may be used to endorse or promote products derived from the Apple
+    Software without specific prior written permission from Apple.  Except
+    as expressly stated in this notice, no other rights or licenses, express
+    or implied, are granted by Apple herein, including but not limited to
+    any patent rights that may be infringed by your derivative works or by
+    other works in which the Apple Software may be incorporated.
+    
+    The Apple Software is provided by Apple on an "AS IS" basis.  APPLE
+    MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION
+    THE IMPLIED WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY AND FITNESS
+    FOR A PARTICULAR PURPOSE, REGARDING THE APPLE SOFTWARE OR ITS USE AND
+    OPERATION ALONE OR IN COMBINATION WITH YOUR PRODUCTS.
+    
+    IN NO EVENT SHALL APPLE BE LIABLE FOR ANY SPECIAL, INDIRECT, INCIDENTAL
+    OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) ARISING IN ANY WAY OUT OF THE USE, REPRODUCTION,
+    MODIFICATION AND/OR DISTRIBUTION OF THE APPLE SOFTWARE, HOWEVER CAUSED
+    AND WHETHER UNDER THEORY OF CONTRACT, TORT (INCLUDING NEGLIGENCE),
+    STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+    
+    Copyright (C) 2010 Apple Inc. All Rights Reserved.
+*/
+
+.EndGame {
+    width: 576px;
+    height: 576px;
+    margin: 0px auto;
+    display: block;
+    position: relative;
+}
+
+#EndGameOverlay {
+    background-color: black;
+}
+
+#EndGamePanel {
+    font-family: sans-serif;
+    color: white;
+}
+
+.EndGameText {
+    text-align: center;
+    font-weight: bold;
+    font-size: 48px;
+}
+
+.EndGameImage {
+    width: 150px;
+    height: 150px;
+    transform: scale(0.0);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.EndGameImage.Showing {
+    transform: scale(1.0);
+    -ms-animation-name: ImageBounce;
+    -ms-animation-duration: 1s;
+    -ms-animation-iteration-count: 1;
+    -ms-animation-timing-function: linear;
+}
+
+@-ms-keyframes ImageBounce {
+    0% {
+        transform: scale(0.1);
+    }
+    50% {
+        transform: scale(2.0);
+    }
+    100% {
+        transform: scale(1.0);
+    }
+}
+
+/*
+    File: GameManager.css
+    
+    Abstract: Checkers Demo
+    
+    Version: 1.0
+    
+    Disclaimer: IMPORTANT:  This Apple software is supplied to you by
+    Apple Inc. ("Apple") in consideration of your agreement to the
+    following terms, and your use, installation, modification or
+    redistribution of this Apple software constitutes acceptance of these
+    terms.  If you do not agree with these terms, please do not use,
+    install, modify or redistribute this Apple software.
+    
+    In consideration of your agreement to abide by the following terms, and
+    subject to these terms, Apple grants you a personal, non-exclusive
+    license, under Apple's copyrights in this original Apple software (the
+    "Apple Software"), to use, reproduce, modify and redistribute the Apple
+    Software, with or without modifications, in source and/or binary forms;
+    provided that if you redistribute the Apple Software in its entirety and
+    without modifications, you must retain this notice and the following
+    text and disclaimers in all such redistributions of the Apple Software.
+    Neither the name, trademarks, service marks or logos of Apple Inc.
+    may be used to endorse or promote products derived from the Apple
+    Software without specific prior written permission from Apple.  Except
+    as expressly stated in this notice, no other rights or licenses, express
+    or implied, are granted by Apple herein, including but not limited to
+    any patent rights that may be infringed by your derivative works or by
+    other works in which the Apple Software may be incorporated.
+    
+    The Apple Software is provided by Apple on an "AS IS" basis.  APPLE
+    MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION
+    THE IMPLIED WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY AND FITNESS
+    FOR A PARTICULAR PURPOSE, REGARDING THE APPLE SOFTWARE OR ITS USE AND
+    OPERATION ALONE OR IN COMBINATION WITH YOUR PRODUCTS.
+    
+    IN NO EVENT SHALL APPLE BE LIABLE FOR ANY SPECIAL, INDIRECT, INCIDENTAL
+    OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) ARISING IN ANY WAY OUT OF THE USE, REPRODUCTION,
+    MODIFICATION AND/OR DISTRIBUTION OF THE APPLE SOFTWARE, HOWEVER CAUSED
+    AND WHETHER UNDER THEORY OF CONTRACT, TORT (INCLUDING NEGLIGENCE),
+    STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+    
+    Copyright (C) 2010 Apple Inc. All Rights Reserved.
+*/
+
+.GameManager {
+    width: 576px;
+    height: 576px;
+}
+
+#GameManagerOverlay {
+    background-color: black;
+}
+
+#GameManagerPanel {
+    font-family: sans-serif;
+    color: white;
+}
+
+.SavedGamesTitle {
+    text-align: center;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 70px;
+    margin-top: 10px;
+    -webkit-text-size-adjust: 75%;
+}
+
+.SavedGameEntryContainer {
+    text-align: center;
+    padding-bottom: 8px;
+}
+
+.SavedGameEntry:active {
+    border: 2px solid gray;
+}
+
+.SavedGameEntry {
+    background-color: black;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    padding:  8px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+    -webkit-text-size-adjust: 130%;
+    border-radius: 10px;
+    border: 2px solid white;
+}
+
+/*
+    File: Utilities.css
+    
+    Abstract: Checkers Demo
+    
+    Version: 1.0
+    
+    Disclaimer: IMPORTANT:  This Apple software is supplied to you by
+    Apple Inc. ("Apple") in consideration of your agreement to the
+    following terms, and your use, installation, modification or
+    redistribution of this Apple software constitutes acceptance of these
+    terms.  If you do not agree with these terms, please do not use,
+    install, modify or redistribute this Apple software.
+    
+    In consideration of your agreement to abide by the following terms, and
+    subject to these terms, Apple grants you a personal, non-exclusive
+    license, under Apple's copyrights in this original Apple software (the
+    "Apple Software"), to use, reproduce, modify and redistribute the Apple
+    Software, with or without modifications, in source and/or binary forms;
+    provided that if you redistribute the Apple Software in its entirety and
+    without modifications, you must retain this notice and the following
+    text and disclaimers in all such redistributions of the Apple Software.
+    Neither the name, trademarks, service marks or logos of Apple Inc.
+    may be used to endorse or promote products derived from the Apple
+    Software without specific prior written permission from Apple.  Except
+    as expressly stated in this notice, no other rights or licenses, express
+    or implied, are granted by Apple herein, including but not limited to
+    any patent rights that may be infringed by your derivative works or by
+    other works in which the Apple Software may be incorporated.
+    
+    The Apple Software is provided by Apple on an "AS IS" basis.  APPLE
+    MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION
+    THE IMPLIED WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY AND FITNESS
+    FOR A PARTICULAR PURPOSE, REGARDING THE APPLE SOFTWARE OR ITS USE AND
+    OPERATION ALONE OR IN COMBINATION WITH YOUR PRODUCTS.
+    
+    IN NO EVENT SHALL APPLE BE LIABLE FOR ANY SPECIAL, INDIRECT, INCIDENTAL
+    OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) ARISING IN ANY WAY OUT OF THE USE, REPRODUCTION,
+    MODIFICATION AND/OR DISTRIBUTION OF THE APPLE SOFTWARE, HOWEVER CAUSED
+    AND WHETHER UNDER THEORY OF CONTRACT, TORT (INCLUDING NEGLIGENCE),
+    STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+    
+    Copyright (C) 2010 Apple Inc. All Rights Reserved.
+*/
+.Overlay {
+    opacity: 0.75;
+}
+
+.Panel {
+    opacity: 1.0;
+}
+
+.Hideable {
+    position: absolute;
+    transition-property: opacity;
+    transition-duration: 0.5s;
+    transition-timing-function: linear;
+}
+
+.Hidden {
+    top: -1000px;
+    left: -1000px;
+}
+
+#AddToHomeScreen {
+  z-index: 100;
+  opacity: 0.8;
+  background-color: white;
+  color: black;
+  margin: 0px;
+  font-size: 42px;
+  font-family: sans-serif;
+  text-align: center;
+  background-image: url('arrow-up.png');
+  background-repeat: no-repeat;
+  background-position: 65px 0px;
+  transition: opacity 0.8s linear;
+  padding-left: 230px;
+  padding-top: 100px;
+  height: 750px;
+}
+
+#AddToHomeScreen > h1 {
+  font-size: 56px;
+  font-weight: bold;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  position: relative;
+  left: -210px;
+  top: 20px;
+  width: 600px;
+}
+
+#dismissHomeScreen {
+  font-size: 28px;
+  font-weight: normal;
+  margin-top: 0px;
+}
+
+/* overlay settings if you launch the app in landscape, on iPad */
+@media screen and (orientation: landscape) {
+  #AddToHomeScreen { 
+    background-position: 22px 0px;
+  }
+}
+/* iPhone-specific settings */
+@media screen and (device-width: 320px) {
+  #AddToHomeScreen {
+    background-image: url('arrow-down.png');
+    background-size: 100% 100%;
+    background-position: 0px 0px;
+    width: 640px;
+    height: 828px;
+    padding-left: 0px;
+    padding-top: 0px;
+  }
+  
+  #AddToHomeScreen > h1 {
+    left: 20px;
+    top: 0px;
+  }
+  #dismissHomeScreen {
+    margin-top: 0px;
+  }
+}
+
+/*
+    File: HighScores.css
+    
+    Abstract: Checkers Demo
+    
+    Version: 1.0
+    
+    Disclaimer: IMPORTANT:  This Apple software is supplied to you by
+    Apple Inc. ("Apple") in consideration of your agreement to the
+    following terms, and your use, installation, modification or
+    redistribution of this Apple software constitutes acceptance of these
+    terms.  If you do not agree with these terms, please do not use,
+    install, modify or redistribute this Apple software.
+    
+    In consideration of your agreement to abide by the following terms, and
+    subject to these terms, Apple grants you a personal, non-exclusive
+    license, under Apple's copyrights in this original Apple software (the
+    "Apple Software"), to use, reproduce, modify and redistribute the Apple
+    Software, with or without modifications, in source and/or binary forms;
+    provided that if you redistribute the Apple Software in its entirety and
+    without modifications, you must retain this notice and the following
+    text and disclaimers in all such redistributions of the Apple Software.
+    Neither the name, trademarks, service marks or logos of Apple Inc.
+    may be used to endorse or promote products derived from the Apple
+    Software without specific prior written permission from Apple.  Except
+    as expressly stated in this notice, no other rights or licenses, express
+    or implied, are granted by Apple herein, including but not limited to
+    any patent rights that may be infringed by your derivative works or by
+    other works in which the Apple Software may be incorporated.
+    
+    The Apple Software is provided by Apple on an "AS IS" basis.  APPLE
+    MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION
+    THE IMPLIED WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY AND FITNESS
+    FOR A PARTICULAR PURPOSE, REGARDING THE APPLE SOFTWARE OR ITS USE AND
+    OPERATION ALONE OR IN COMBINATION WITH YOUR PRODUCTS.
+    
+    IN NO EVENT SHALL APPLE BE LIABLE FOR ANY SPECIAL, INDIRECT, INCIDENTAL
+    OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) ARISING IN ANY WAY OUT OF THE USE, REPRODUCTION,
+    MODIFICATION AND/OR DISTRIBUTION OF THE APPLE SOFTWARE, HOWEVER CAUSED
+    AND WHETHER UNDER THEORY OF CONTRACT, TORT (INCLUDING NEGLIGENCE),
+    STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+    
+    Copyright (C) 2010 Apple Inc. All Rights Reserved.
+*/
+
+.HighScores {
+    width: 576px;
+    height: 576px;
+}
+
+#HighScoresOverlay {
+    background-color: black;
+}
+
+#HighScoresPanel {
+    font-family: sans-serif;
+    color: white;
+}
+
+.HighScoresTitle {
+    text-align: center;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 70px;
+    margin-top: 10px;
+}
+
+.HighScorer, .Score {
+    float: left;
+    width: 208px;
+    line-height: 50px;
+    white-space:nowrap;
+}
+
+.HighScorer {
+    text-align: left;
+    padding-left: 80px;
+}
+
+.Score {
+    text-align: right;
+    padding-right: 80px;
+}
+
+.HighScoreContainer {
+  font-size: 24px;
+  -webkit-text-size-adjust: 130%;
+}
+
+/*
+    File: Achievement.css
+    
+    Abstract: Checkers Demo
+    
+    Version: 1.0
+    
+    Disclaimer: IMPORTANT:  This Apple software is supplied to you by
+    Apple Inc. ("Apple") in consideration of your agreement to the
+    following terms, and your use, installation, modification or
+    redistribution of this Apple software constitutes acceptance of these
+    terms.  If you do not agree with these terms, please do not use,
+    install, modify or redistribute this Apple software.
+    
+    In consideration of your agreement to abide by the following terms, and
+    subject to these terms, Apple grants you a personal, non-exclusive
+    license, under Apple's copyrights in this original Apple software (the
+    "Apple Software"), to use, reproduce, modify and redistribute the Apple
+    Software, with or without modifications, in source and/or binary forms;
+    provided that if you redistribute the Apple Software in its entirety and
+    without modifications, you must retain this notice and the following
+    text and disclaimers in all such redistributions of the Apple Software.
+    Neither the name, trademarks, service marks or logos of Apple Inc.
+    may be used to endorse or promote products derived from the Apple
+    Software without specific prior written permission from Apple.  Except
+    as expressly stated in this notice, no other rights or licenses, express
+    or implied, are granted by Apple herein, including but not limited to
+    any patent rights that may be infringed by your derivative works or by
+    other works in which the Apple Software may be incorporated.
+    
+    The Apple Software is provided by Apple on an "AS IS" basis.  APPLE
+    MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION
+    THE IMPLIED WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY AND FITNESS
+    FOR A PARTICULAR PURPOSE, REGARDING THE APPLE SOFTWARE OR ITS USE AND
+    OPERATION ALONE OR IN COMBINATION WITH YOUR PRODUCTS.
+    
+    IN NO EVENT SHALL APPLE BE LIABLE FOR ANY SPECIAL, INDIRECT, INCIDENTAL
+    OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+    INTERRUPTION) ARISING IN ANY WAY OUT OF THE USE, REPRODUCTION,
+    MODIFICATION AND/OR DISTRIBUTION OF THE APPLE SOFTWARE, HOWEVER CAUSED
+    AND WHETHER UNDER THEORY OF CONTRACT, TORT (INCLUDING NEGLIGENCE),
+    STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE
+    POSSIBILITY OF SUCH DAMAGE.
+    
+    Copyright (C) 2010 Apple Inc. All Rights Reserved.
+*/
+
+
+.AchievementOverlay, .Achievement {
+    position: absolute;
+    opacity: 0.0;
+    top: 300px;
+    left: 0px;
+    right: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 608px;
+    height: 128px;
+    border-radius: 32px 32px;
+    border: 2px solid gray;
+    transition-property: opacity;
+    transition-duration: 0.75s;
+    transition-timing-function: linear;
+}
+
+.AchievementOverlay {
+    background-color: #3B3F40; 
+}
+
+.Achievement img {
+    float: left;
+    width: 112px;
+    height: 112px;
+    margin: 8px;
+}
+
+.AchievementText {
+    display: inline-block;
+    font-family: Arial;
+    font-size: 36px;
+    color: white;
+    margin-left:60px;
+}
+
+.AchievementCaption {
+    position:relative;
+    margin-top: 16px;
+    height: 52px;
+    width: 440px;
+}
+
+.AchievementDescription {
+    position:relative;
+    height:48px;
+}

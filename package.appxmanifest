@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
+  <Identity Name="64377VilloLabs.CheckersforWindows8" Version="1.0.0.3" Publisher="CN=451106D3-9DF2-4A38-80FC-5035FC3C2C76" />
+  <Properties>
+    <DisplayName>Checkers for Windows 8</DisplayName>
+    <PublisherDisplayName>Villo Labs</PublisherDisplayName>
+    <Logo>images\storelogo.png</Logo>
+  </Properties>
+  <Prerequisites>
+    <OSMinVersion>6.2.1</OSMinVersion>
+    <OSMaxVersionTested>6.2.1</OSMaxVersionTested>
+  </Prerequisites>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" StartPage="default.html">
+      <VisualElements DisplayName="Checkers" Logo="images\icon.png" SmallLogo="images\smallicon.png" Description="Checkers is a classic board game played worldwide, and now you can play where ever you are with Checker for Windows 8! Play against the computer and try to see if your skill can be matched. Enjoy a selection of board themes, features, and wonderful graphics." ForegroundText="light" BackgroundColor="#9b2626">
+        <DefaultTile ShowName="allLogos" WideLogo="images\iconbig.png" />
+        <SplashScreen Image="images\splash.png" BackgroundColor="#474747" />
+        <InitialRotationPreference>
+          <Rotation Preference="landscape" />
+          <Rotation Preference="landscapeFlipped" />
+        </InitialRotationPreference>
+      </VisualElements>
+    </Application>
+  </Applications>
+</Package>

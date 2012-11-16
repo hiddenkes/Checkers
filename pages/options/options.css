@@ -1,0 +1,15 @@
+﻿.options section[role=main] {
+    margin-left: 120px;
+}
+
+@media screen and (-ms-view-state: snapped) {
+    .options section[role=main] {
+        margin-left: 20px;
+    }
+}
+
+@media screen and (-ms-view-state: portrait) {
+    .options section[role=main] {
+        margin-left: 200px;
+    }
+}

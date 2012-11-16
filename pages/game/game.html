@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>game</title>
+
+    <!-- WinJS references -->
+    <link href="//Microsoft.WinJS.1.0/css/ui-dark.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.1.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.1.0/js/ui.js"></script>
+
+    <link href="game.css" rel="stylesheet" />
+    <script src="game.js"></script>
+
+    <link href="copied/compiled.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <script src="copied/Achievements.js"></script>
+    <script src="copied/AIOpponent.js"></script>
+	<script src="copied/Checkers.js"></script>
+	<script src="copied/EndGame.js"></script>
+	<script src="copied/GameManager.js"></script>
+    <script src="copied/HighScores.js"></script>
+	<script src="copied/Utilities.js"></script>
+    <div id="appBar" data-win-control="WinJS.UI.AppBar" data-win-options="">
+        <button 
+            data-win-control="WinJS.UI.AppBarCommand" 
+            data-win-options="{id:'cmdAdd',label:'New Game',icon:'add',
+                section:'global',tooltip:'New Game'}">
+        </button>
+    </div>
+    <div id="host" class="stripes">
+		<div id="mask" class="mask2">
+            <div class="game fragment">
+                <header aria-label="Header content" role="banner">
+                    <button class="win-backbutton" aria-label="Back" disabled type="button"></button>
+                    <h1 class="titlearea win-type-ellipsis">
+                        <span class="pagetitle"></span>
+                    </h1>
+                </header>
+                <div id="alerts" class="flashClient"></div>
+                <section aria-label="Main content" role="main">
+			        <!-- Game gets rendered here: -->
+                    <div id="GameParent"></div>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

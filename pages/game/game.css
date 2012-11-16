@@ -1,0 +1,81 @@
+﻿#host {
+	background-color: #16214D;	
+}
+
+.mask2 {
+	width: 100%;
+	height: 100%;
+	background-image: -ms-radial-gradient(rgba(0,0,0,0.5) 0%, rgba(0,0,0,1) 100%); 
+}
+
+.game p {
+    margin-left: 120px;
+}
+
+.flashClient {
+    width: 500px;
+    top: 0px;
+    left: 50%;
+    position: absolute;
+    margin-left: -250px;
+    z-index: 500;
+}
+
+@keyframes bounce {
+    from {
+        transform: perspective(500px) rotateY(50deg) rotateX(-50deg) scale(0.8);
+        opacity: 0;
+        top: -100px;
+    }
+    to {
+        transform: perspective(500px) rotateY(0deg) rotateX(0deg) scale(1);
+        opacity: 1;
+        top: 0px;
+    }
+}
+
+@keyframes out {
+    from {
+        transform: perspective(500px) rotateY(0deg) rotateX(0deg) scale(1);
+        opacity: 1;
+        height: 65px;
+        margin: 10px;
+    }
+    to {
+        transform: perspective(500px) rotateY(50deg) rotateX(-50deg) scale(0.8);
+        opacity: 0;
+        height: 0px;
+        padding: 0px;
+        margin: 0px;
+    }
+}
+
+.flashAlert {
+    opacity: 0;
+    height: 65px;
+    width: 500px;
+
+    font-size: 1.2em;
+    color: rgb(42, 42, 42);
+    box-sizing: border-box;
+    padding: 20px;
+
+    transform-origin: 50% 50%;
+    transform: perspective(500px) rotateX(90deg);
+
+    background-color: rgba(255, 255, 255, 0.8);
+
+    margin: 10px;
+
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.flashAlert.showing {
+    animation-name: bounce;
+}
+
+.flashAlert.hide {
+    animation-name: out;
+}
